@@ -57,7 +57,7 @@ Um projeto para capturar e inspecionar webhooks HTTP, armazenando-os em um banco
 
 # Tecnologias Utilizadas no Backend - Webhook Inspector
 
-Este documento descreve as tecnologias e ferramentas empregadas no desenvolvimento do backend da aplicação Webhook Inspector, demonstrando as habilidades e conhecimentos aplicados nesta parte do projeto.
+Este tópico descreve as tecnologias e ferramentas empregadas no desenvolvimento do backend da aplicação Webhook Inspector, demonstrando as habilidades e conhecimentos aplicados nesta parte do projeto.
 
 ## Linguagem e Runtime
 - **Node.js**: Ambiente de execução JavaScript no servidor, utilizado para construir aplicações escaláveis e de alta performance.
@@ -90,4 +90,4 @@ Este documento descreve as tecnologias e ferramentas empregadas no desenvolvimen
 ## Infraestrutura e DevOps
 - **Docker Compose**: Orquestração de containers para configurar e executar o banco de dados PostgreSQL localmente.
 
-Essas tecnologias foram escolhidas por sua maturidade, performance e integração perfeita, permitindo o desenvolvimento de uma API robusta, type-safe e bem documentada para inspeção de webhooks.
+Essas tecnologias foram escolhidas por sua maturidade, performance e integração perfeita, permitindo o desenvolvimento de uma API robusta, type-safe e bem documentada para inspeção de webhooks.  
