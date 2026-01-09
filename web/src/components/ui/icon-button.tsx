@@ -1,13 +1,13 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 //tailwind variants
 const iconButton = tv({
   base: 'flex items-center justify-center rounded-lg hover:bg-zinc-700 trasition-colors duration-150',
   variants: {
-    size: { 
+    size: {
       sm: 'size-6',
-      md: 'size-8'
+      md: 'size-8',
     },
   },
   defaultVariants: {
@@ -15,19 +15,26 @@ const iconButton = tv({
   },
 })
 
-//prop created for buttons - aqui estão todas as propriedades do componente do tipo 'button' 
-interface IconButtonProps extends ComponentProps<'button'>, VariantProps<typeof iconButton> {
+//prop created for buttons - aqui estão todas as propriedades do componente do tipo 'button'
+interface IconButtonProps
+  extends ComponentProps<'button'>,
+    VariantProps<typeof iconButton> {
   icon: ReactNode
 }
 
-export function IconButton({icon, size, className,...props}: IconButtonProps) {
+export function IconButton({
+  icon,
+  size,
+  className,
+  ...props
+}: IconButtonProps) {
   return (
-    <button 
-      type="button" 
+    <button
+      type="button"
       className={iconButton({ size, className })}
       {...props}
     >
-        {icon}
+      {icon}
     </button>
   )
 }

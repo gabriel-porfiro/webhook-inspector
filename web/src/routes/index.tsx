@@ -1,12 +1,24 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Panel, Group, Separator } from 'react-resizable-panels'
 import { Sidebar } from '../components/sidebar'
+import { Badge } from '../components/ui/badge'
+import { WebhookDetailHeader } from '../components/webhook-detail-header'
+import { SectionTitle } from '../components/section-title'
+import { SectionDataTable } from '../components/section-data-table'
+import { CodeBlock } from '../components/ui/code-block'
 
 export const Route = createFileRoute('/')({
   component: Index,
 })
 
 function Index() {
+  const overViewData = [
+    { key: 'Method', value: 'POST'},
+    { key: 'StatusCode', value: '200'},
+    { key: 'Content-Type', value: 'application/json'},
+    { key: 'Content-Length', value: '287665 bytes'},
+  ]
+
   return (
     <div className='h-screen bg-zinc-900'>
       <Group>
@@ -17,7 +29,32 @@ function Index() {
         <Separator className="w-px bg-zinc-700 hover:bg-zinc-600 transition-colors duration-150"/>
 
         <Panel> 
-          Conteudo
+          <div className='flex h-full flex-col'>
+            <WebhookDetailHeader />
+            <div className='flex-1 overflow-y-auto'>
+              <div className='space-y-6 p-6'>
+                <div className='space-y-4'>
+                  <SectionTitle>Request Overview</SectionTitle>
+                  <SectionDataTable data={overViewData}/>
+                </div>
+
+                <div className='space-y-4'>
+                  <SectionTitle>Query Parameters</SectionTitle>
+                  <SectionDataTable data={overViewData}/>
+                </div>
+
+                <div className='space-y-4'>
+                  <SectionTitle>Headers</SectionTitle>
+                  <SectionDataTable data={overViewData}/>
+                </div>
+
+                <div className='space-y-4'>
+                  <SectionTitle>Request Body</SectionTitle>
+                  <CodeBlock code={JSON.stringify(overViewData, null, 2)}/>
+                </div>
+              </div>
+            </div>
+          </div>
         </Panel>
       </Group>
     </div>
