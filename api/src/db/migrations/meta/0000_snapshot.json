@@ -1,5 +1,5 @@
 {
-  "id": "93938d7c-f875-4110-9f72-5112eeb4a770",
+  "id": "fe88809d-e41b-4b87-9985-8deb6d8c822f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -47,7 +47,7 @@
         },
         "content_length": {
           "name": "content_length",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -57,8 +57,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "header": {
-          "name": "header",
+        "headers": {
+          "name": "headers",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": true
