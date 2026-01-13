@@ -5,9 +5,9 @@ CREATE TABLE "webhooks" (
 	"ip" text NOT NULL,
 	"status_code" integer DEFAULT 200 NOT NULL,
 	"content_type" text,
-	"content_length" text,
+	"content_length" integer,
 	"query_params" jsonb,
-	"header" jsonb NOT NULL,
+	"headers" jsonb NOT NULL,
 	"body" text,
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
