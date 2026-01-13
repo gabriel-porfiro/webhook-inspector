@@ -30,11 +30,18 @@ export const captureWebhook: FastifyPluginAsyncZod = async (app) => {
       if (request.body) {
         body = typeof request.body === 'string'
           ? request.body
+<<<<<<< HEAD
           : JSON.stringify(request.body, null, 2)
       }
 
       const pathname = new URL(request.url).pathname.replace('/capture', '')
 
+=======
+          : JSON.stringify(request.body, null,2)
+      }
+
+      const pathname = new URL(request.url).pathname.replace('/capture', '')
+>>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
       const headers = Object.fromEntries(
         Object.entries(request.headers).map(([key, value]) => [
           key,
@@ -59,4 +66,8 @@ export const captureWebhook: FastifyPluginAsyncZod = async (app) => {
       
     },
   )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b

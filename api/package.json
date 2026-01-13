@@ -10,7 +10,11 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
+<<<<<<< HEAD
     "db:seed": "tsx --env-file=.env src/db/seed.ts"  
+=======
+    "db:seed": "tsx --env-file=.env src/db/seed.ts"
+>>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
   },
   "keywords": [],
   "author": "",

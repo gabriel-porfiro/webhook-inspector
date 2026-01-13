@@ -1,5 +1,9 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+<<<<<<< HEAD
 import { webhookDetailsSchema } from '../http/schemas/webhooks'
+=======
+import { webhookDetailsSchema } from '../http/schemas/webhook'
+>>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
 import { WebhookDetailHeader } from './webhook-detail-header'
 import { SectionTitle } from './section-title'
 import { SectionDataTable } from './section-data-table'
@@ -74,4 +78,8 @@ export function WebhookDetails({ id }: WebhookDetailProps) {
       </div>
     </div>
   )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
