@@ -114,9 +114,5 @@ seed()
     process.exit(1)
   })
   .finally(() => {
-<<<<<<< HEAD
     process.exit(0)
   })
-=======
-    process.exit(0)}) 
->>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b

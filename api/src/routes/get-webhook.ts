@@ -37,8 +37,5 @@ export const getWebhook: FastifyPluginAsyncZod = async (app) => {
       return reply.send(result[0]) //toda query de um banco de dados retorna um array
     },
   )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
+

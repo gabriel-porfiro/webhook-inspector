@@ -12,11 +12,7 @@ import { env } from './env'
 
 import { listWebhooks } from './routes/list-webhooks'
 import { getWebhook } from './routes/get-webhook'
-<<<<<<< HEAD
 import { deleteWebhook } from './routes/delete-webhkook'
-=======
-import { deleteWebhook } from './routes/delete-webhook'
->>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
 import { captureWebhook } from './routes/capture-webhook'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()

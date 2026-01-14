@@ -40,8 +40,4 @@ export function CodeBlock({
 }
 
 //O bloco de código gerado pela lib shik está dentro de uma tag pre, sendo assim temos que utilizar no tailwindcss:
-<<<<<<< HEAD
 // [&_pre]:  <== ***
-=======
-// [&_pre]:  <== ***
->>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b

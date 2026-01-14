@@ -1,10 +1,6 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { WebhooksListItem } from './webhooks-list-item'
-<<<<<<< HEAD
 import { webhookListSchema } from '../http/schemas/webhooks'
-=======
-import { webhookListSchema } from '../http/schemas/webhook'
->>>>>>> 19455b1bf5a95027084472b9ae4cfd07b044380b
 import { Loader2 } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
