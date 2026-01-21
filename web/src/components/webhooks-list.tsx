@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { WebhooksListItem } from './webhooks-list-item'
 import { webhookListSchema } from '../http/schemas/webhooks'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Wand2 } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
 export function WebhooksList() {
   const loadMoreRef = useRef<HTMLDivElement>(null)
   const observerRef = useRef<IntersectionObserver>(null)
+
+  const [checkedWebhooksIds, setCheckedWebhooksIds] = useState<string[]>([])
+  const [generateHandlerCode, setGenerateHandlerCode] = useState<string | null>(null)
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
@@ -62,11 +66,56 @@ export function WebhooksList() {
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
+  function handleCheckWebhook(checkedWebhookId: string) {
+    if (checkedWebhooksIds.includes(checkedWebhookId)) {
+      setCheckedWebhooksIds(state => {
+        return state.filter(webhookId => webhookId !== checkedWebhookId)
+      })
+    } else {
+      setCheckedWebhooksIds(state => [...state, checkedWebhookId])
+    }
+  }
+
+  async function handleGenerateHandler() {
+    const response = await fetch('http://localhost:3333/api/generate', {
+      method: 'POST',
+      body: JSON.stringify({ webhookIds: checkedWebhooksIds }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+
+    type GenerateResponse = {code: string}
+
+    const data: GenerateResponse = await response.json()    
+
+    setGenerateHandlerCode(data.code)
+  }
+
+  const hasAnyWebhookChecked = checkedWebhooksIds.length > 0 
+  
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="space-y-1 p-2">
+        
+        <button 
+          disabled={!hasAnyWebhookChecked} 
+          className='bg-indigo-400 mb-3 text-white w-full rounded-lg flex items-center justify-center gap-3 font-medium text-sm p-2 disabled:opacity-50'
+          onClick={() => handleGenerateHandler()}
+        >
+          <Wand2 className='size-4' />
+          Gerar Handler
+        </button>
+
         {webhooks.map((webhook) => {
-          return <WebhooksListItem key={webhook.id} webhook={webhook} />
+          return (
+            <WebhooksListItem 
+              key={webhook.id} 
+              webhook={webhook} 
+              onWebhookChecked={handleCheckWebhook} 
+              isWebhookChecked={checkedWebhooksIds.includes(webhook.id)}        
+              />
+          )
         })}
       </div>
 
@@ -79,6 +128,7 @@ export function WebhooksList() {
           )}
         </div>
       )}
+
     </div>
   )
 }

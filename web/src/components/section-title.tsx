@@ -11,3 +11,4 @@ export function SectionTitle({ className, ...props }: SectionTitleProps) {
     />
   )
 }
+ 
