@@ -105,6 +105,7 @@ cd api
 pnpm install
 docker-compose up -d
 pnpm db:migrate
+pnpm db:seed
 pnpm run dev
 ```
 A API estará disponível em [http://localhost:3333](http://localhost:3333) e a documentação em [http://localhost:3333/docs](http://localhost:3333/docs).
