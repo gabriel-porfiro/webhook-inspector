@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef  } from 'react'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import * as Dialog from '@radix-ui/react-dialog'
 import { WebhooksListItem } from './webhooks-list-item'
 import { webhookListSchema } from '../http/schemas/webhooks'
 import { Loader2, Wand2 } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { CodeBlock } from './ui/code-block'
+
 
 export function WebhooksList() {
   const loadMoreRef = useRef<HTMLDivElement>(null)
   const observerRef = useRef<IntersectionObserver>(null)
 
   const [checkedWebhooksIds, setCheckedWebhooksIds] = useState<string[]>([])
-  const [generateHandlerCode, setGenerateHandlerCode] = useState<string | null>(null)
+  const [generatedHandlerCode, setGeneratedHandlerCode] = useState<string | null>(null)
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
@@ -89,46 +91,60 @@ export function WebhooksList() {
 
     const data: GenerateResponse = await response.json()    
 
-    setGenerateHandlerCode(data.code)
+    setGeneratedHandlerCode(data.code)
   }
 
   const hasAnyWebhookChecked = checkedWebhooksIds.length > 0 
   
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="space-y-1 p-2">
-        
-        <button 
-          disabled={!hasAnyWebhookChecked} 
-          className='bg-indigo-400 mb-3 text-white w-full rounded-lg flex items-center justify-center gap-3 font-medium text-sm p-2 disabled:opacity-50'
-          onClick={() => handleGenerateHandler()}
-        >
-          <Wand2 className='size-4' />
-          Gerar Handler
-        </button>
+    <>
+      <div className="flex-1 overflow-y-auto">
+        <div className="space-y-1 p-2">
+          
+          <button 
+            disabled={!hasAnyWebhookChecked} 
+            className='bg-indigo-400 mb-3 text-white w-full rounded-lg flex items-center justify-center gap-3 font-medium text-sm p-2 disabled:opacity-50'
+            onClick={() => handleGenerateHandler()}
+          >
+            <Wand2 className='size-4' />
+            Gerar Handler
+          </button>
 
-        {webhooks.map((webhook) => {
-          return (
-            <WebhooksListItem 
-              key={webhook.id} 
-              webhook={webhook} 
-              onWebhookChecked={handleCheckWebhook} 
-              isWebhookChecked={checkedWebhooksIds.includes(webhook.id)}        
-              />
-          )
-        })}
+          {webhooks.map((webhook) => {
+            return (
+              <WebhooksListItem 
+                key={webhook.id} 
+                webhook={webhook} 
+                onWebhookChecked={handleCheckWebhook} 
+                isWebhookChecked={checkedWebhooksIds.includes(webhook.id)}        
+                />
+            )
+          })}
+        </div>
+
+        {hasNextPage && (
+          <div className="p-2" ref={loadMoreRef}>
+            {isFetchingNextPage && (
+              <div className="flex items-center justify-center py-2">
+                <Loader2 className="size-5 animate-spin text-zinc-500" />
+              </div>
+            )}
+          </div>
+        )}
+
       </div>
 
-      {hasNextPage && (
-        <div className="p-2" ref={loadMoreRef}>
-          {isFetchingNextPage && (
-            <div className="flex items-center justify-center py-2">
-              <Loader2 className="size-5 animate-spin text-zinc-500" />
-            </div>
-          )}
-        </div>
-      )}
+      {!!generatedHandlerCode && (
+        <Dialog.Root defaultOpen>
+          <Dialog.Overlay className='bg-black/60 inset-0 fixed z-20'/>
 
-    </div>
+          <Dialog.Content className='flex items-center justify-center fixed left-1/2 top-1/2 mas-h-[85vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 z-40 '>
+            <div className='bg-zinc-900 p-4 rounded-lg border border-zinc-800 max-h-120 max-w-310 overflow-y-auto'>
+              <CodeBlock language='java' code={generatedHandlerCode} />
+            </div>
+          </Dialog.Content>
+        </Dialog.Root>
+      )}
+    </>
   )
 }

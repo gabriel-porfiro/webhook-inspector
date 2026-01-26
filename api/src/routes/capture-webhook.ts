@@ -4,7 +4,7 @@ import { webhooks } from '@/db/schema'
 import { db } from '@/db'
 
 export const captureWebhook: FastifyPluginAsyncZod = async (app) => {
-  app.all( //Esta rota recebe todos os métodos
+  app.all( 
     '/capture/*',
     {
       schema: {
