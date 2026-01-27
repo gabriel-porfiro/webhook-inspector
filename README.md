@@ -1,15 +1,11 @@
 # Webhook Inspector
 
-Um projeto para capturar e inspecionar webhooks HTTP, armazenando-os em um banco de dados PostgreSQL para análise.
+O Webhook Inspector é uma aplicação fullstack desenvolvida para capturar, armazenar e inspecionar webhooks HTTP. 
 
-## Principais Tecnologias
+Este projeto foi criado como uma ferramenta de aprendizado e demonstração técnica, com foco na captura de webhooks fictícios gerados automaticamente pelo próprio sistema. Esses webhooks são armazenados em um banco de dados PostgreSQL e podem ser visualizados, analisados e gerenciados através de uma interface web intuitiva.
 
-- **Backend**: Fastify, TypeScript, Drizzle ORM, PostgreSQL, Zod
-- **Frontend**: React, Vite, TypeScript, TailwindCSS, TanStack Router, TanStack Query
-- **Ferramentas**: pnpm, Biome, Docker, Swagger/Scalar
+A geração automática de webhooks fictícios permite simular cenários reais de integração, facilitando a demonstração das funcionalidades do sistema sem depender de sistemas externos. Assim, o Webhook Inspector é ideal para estudos e apresentações técnicas. 
 
----
----
 
 ## Instalação
 
@@ -29,7 +25,20 @@ Um projeto para capturar e inspecionar webhooks HTTP, armazenando-os em um banco
    pnpm install
    ```
 
-4. **Configure o banco de dados**:
+4. **Configuração das Variáveis de Ambiente** 
+   ```bash
+   Antes de configurar o banco de dados, crie um arquivo `.env` na raiz pasta `api` com o seguinte conteúdo:
+
+   ```
+   DATABASE_URL="postgresql://usuario:senha@localhost:5432/webhooks"
+   GOOGLE_GENERATIVE_AI_API_KEY="sua-chave-gemini"
+   ```
+
+   - Para a variável `DATABASE_URL` => utilize a string de conexão do seu banco PostgreSQL.
+   - Para a variável `GOOGLE_GENERATIVE_AI_API_KEY`, obtenha uma chave gratuita do Gemini em: https://aistudio.google.com/app/apikey
+      ```
+
+5. **Configure o banco de dados**:
    ```bash
    cd api
    docker-compose up -d
@@ -59,13 +68,9 @@ Um projeto para capturar e inspecionar webhooks HTTP, armazenando-os em um banco
 
 <parameter name="filePath">F:\projetos\webhook-inspector\README.md
 
-## Como o projeto foi construído
+## Principais Tecnologias e Ferramentas:
 
 ### Front-End
-
-O front-end foi desenvolvido utilizando **React** com **TypeScript**, utilizando o **Vite** para o bundling e desenvolvimento rápido. A interface utiliza **TailwindCSS** para estilização, garantindo responsividade e visual moderno. A navegação é gerenciada pelo **TanStack Router** e o gerenciamento de dados assíncronos pelo **TanStack Query**. O código é organizado em componentes reutilizáveis e segue boas práticas de acessibilidade e UX.
-
-#### Principais Tecnologias e Ferramentas:
 - React 19
 - TypeScript
 - Vite
@@ -75,21 +80,7 @@ O front-end foi desenvolvido utilizando **React** com **TypeScript**, utilizando
 - Radix UI
 - Lucide React
 
-#### Como executar o Front-End:
-```bash
-cd web
-pnpm install
-pnpm run dev
-```
-O front-end estará disponível em [http://localhost:5173](http://localhost:5173).
-
----
-
 ### Back-End
-
-O back-end foi construído com **Fastify** e **TypeScript**, utilizando o **Drizzle ORM** para integração com o banco de dados **PostgreSQL**. A validação de dados é feita com **Zod** e a documentação da API é gerada automaticamente com **Swagger** e apresentada via **Scalar**. O ambiente de desenvolvimento utiliza **Docker** para facilitar a configuração do banco de dados.
-
-#### Principais Tecnologias e Ferramentas:
 - Fastify
 - TypeScript
 - Drizzle ORM
@@ -98,14 +89,3 @@ O back-end foi construído com **Fastify** e **TypeScript**, utilizando o **Driz
 - Swagger / Scalar
 - Docker / Docker Compose
 - Biome
-
-#### Como executar o Back-End:
-```bash
-cd api
-pnpm install
-docker-compose up -d
-pnpm db:migrate
-pnpm db:seed
-pnpm run dev
-```
-A API estará disponível em [http://localhost:3333](http://localhost:3333) e a documentação em [http://localhost:3333/docs](http://localhost:3333/docs).
