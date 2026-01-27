@@ -66,8 +66,6 @@ A geração automática de webhooks fictícios permite simular cenários reais d
    - Pelo Front-End: acesse [http://localhost:5173](http://localhost:5173) para uma interface visual completa.
    - Pela API: utilize os endpoints documentados em [http://localhost:3333/docs](http://localhost:3333/docs).
 
-<parameter name="filePath">F:\projetos\webhook-inspector\README.md
-
 ## Principais Tecnologias e Ferramentas:
 
 ### Front-End
